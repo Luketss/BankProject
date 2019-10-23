@@ -1,0 +1,51 @@
+package bankproject;
+
+import java.util.Scanner;
+
+public class Teste {
+
+    public void TransferenciaConta() {
+        Scanner s = new Scanner(System.in);
+        System.out.println("Digite o valor da transferencia: ");
+        double valorTransferencia = s.nextDouble();
+
+    }
+
+    public static void Saque(double saldo, ContaBancaria limiteSaque, double saque) {
+        Scanner s = new Scanner(System.in);
+        System.out.println("Insira o valor do saque: ");
+        saque = s.nextFloat();
+
+        saldo = saldo - saque;
+
+        System.out.println("O seu saldo é de: " + saldo);
+    }
+
+    public void TransferenciaConta(ContaBancaria saldoOrigem, ContaBancaria saldoDestino, double valor) {
+
+        double conta1Saldo, conta2Saldo, tranferencia;
+
+        conta1Saldo = saldoOrigem.getSaldo();
+
+        conta1Saldo -= valor;
+
+        conta2Saldo = saldoDestino.getSaldo();
+
+        saldoOrigem.setSaldo(conta1Saldo);        
+        
+    }
+
+    public static void main(String[] args) {
+        
+        Cliente c1 = new Cliente("Joao", "Rua a", "M", 1500);
+        Cliente c2 = new Cliente("Maria", "Rua b", "F", 2000);
+        Cliente c3 = new Cliente("Lucas", "Rua c", "M", 2500);
+        Cliente c4 = new Cliente("Bruno", "Rua d", "M", 3500);
+        Cliente c5 = new Cliente("Samuel", "Rua e", "M", 800);
+
+        ContaBancaria conta1 = new ContaBancaria(1, c1, 1800, 2000, 1000);
+        ContaBancaria conta2 = new ContaBancaria(2, c2, 3000, 2500, 1500);        
+     
+        TransferenciaConta(conta1, conta2);
+    }
+}
