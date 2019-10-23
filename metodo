@@ -1,0 +1,23 @@
+public void TransferenciaConta (contaBancaria saldoOrigem, contaBancaria saldoDestino, double valor){
+
+        double conta1Saldo, conta2Saldo, tranferencia;
+        
+        conta1Saldo = saldoOrigem.getSaldo();
+        
+        conta1Saldo -= valor;
+        
+        conta2Saldo = saldoDestino.getSaldo();
+        
+        saldoOrigem.setSaldo(conta1Saldo);
+        
+      
+        
+        
+        
+    }
+    
+    public static void main(String[] args) {
+        Cliente c1 = new Cliente("a", "2", "b", "3"); 
+        
+        contaBancaria conta = new contaBancaria(1, c1, 1000, 1050, 2000 );
+        
