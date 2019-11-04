@@ -1,0 +1,65 @@
+public class ContaBancaria {
+
+    public static double Transferencia(int conta, double limiteTranferencia, double saldo, int contaDestino, double saldoDestino){
+        Scanner entrada = new Scanner(System.in);
+        
+        
+        double saldoAtual = saldo, digTranf, saldoDest = saldoDestino;
+        
+        System.out.println("Qual valor deseja tranferir? \nSeu limite é de: " + limiteTranferencia);
+        digTranf = entrada.nextDouble();
+        
+        if(digTranf <= limiteTranferencia && saldo >= digTranf){
+            saldoAtual -= digTranf;
+            saldoDestino += digTranf;
+        }else{
+            System.out.println("A operação não foi concluída");
+        }
+        
+        return saldoAtual;
+    }
+    
+    public static double SacarDinheiro(int conta, double limite, double saldo){
+        Scanner entrada = new Scanner(System.in);
+        
+        double saldoAtual = saldo, digSaque;
+        
+        System.out.println("Quanto deseja sacar? \nO seu limite é de " + limite);
+        digSaque = entrada.nextDouble();
+        
+        if(digSaque <= limite && digSaque <= saldo){
+            saldoAtual -= digSaque;
+            System.out.println("Saldo restante: " + saldoAtual);
+            
+            
+        }else{
+            System.out.println("O saque não permitido");
+        }
+        return saldoAtual;
+    }
+    
+    
+    public static void main(String[] args) {
+        
+        Cliente a1 = new Cliente("Lucas", "Rua A", "Masculino", 6000);
+        Cliente a2 = new Cliente("Samuel", "Rua Lagos", "Masculino", 8000.66);
+        Cliente a3 = new Cliente("Hashi", "Rua Sushi", "Masculino", 10000.88);
+        
+        Conta c1 = new Conta(215, a1, 18000, 2000, 500);
+        Conta c2 = new Conta(125, a2, 24000, 2200, 700);
+        Conta c3 = new Conta(512, a3, 30000, 2400, 900);
+        
+        c1.setSaldo(SacarDinheiro(c1.getConta(), c1.getSaque(), c1.getSaldo()));
+        
+        c1.setSaldo(Transferencia(c1.getConta(), c1.getLimite(), c1.getSaldo(), c2.getConta(), c2.getSaldo()));
+        
+        
+        System.out.println(c1.getConta());
+        System.out.println(c1.getSaldo());
+        
+        System.out.println(c2.getConta());
+        System.out.println(c2.getSaldo());
+        
+    }
+    
+}
