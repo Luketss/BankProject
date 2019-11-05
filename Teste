@@ -4,35 +4,40 @@ import java.util.Scanner;
 
 public class Teste {
 
-    public void TransferenciaConta() {
-        Scanner s = new Scanner(System.in);
-        System.out.println("Digite o valor da transferencia: ");
-        double valorTransferencia = s.nextDouble();
-
-    }
-
-    public static void Saque(double saldo, ContaBancaria limiteSaque, double saque) {
-        Scanner s = new Scanner(System.in);
-        System.out.println("Insira o valor do saque: ");
-        saque = s.nextFloat();
-
-        saldo = saldo - saque;
-
-        System.out.println("O seu saldo é de: " + saldo);
-    }
-
-    public void TransferenciaConta(ContaBancaria saldoOrigem, ContaBancaria saldoDestino, double valor) {
-
-        double conta1Saldo, conta2Saldo, tranferencia;
-
-        conta1Saldo = saldoOrigem.getSaldo();
-
-        conta1Saldo -= valor;
-
-        conta2Saldo = saldoDestino.getSaldo();
-
-        saldoOrigem.setSaldo(conta1Saldo);        
+    public static void TransferenciaConta(Conta contaOrigem, Conta contaDestino,Conta limite) {
+        Scanner entrada = new Scanner(System.in);
         
+        
+        double digTranf, contaDest = contaDestino.getSaldo(), contaOr = contaOrigem.getSaldo();
+        
+        System.out.println("Qual valor deseja tranferir? \nSeu limite é de: " + limite.getLimite());
+        digTranf = entrada.nextDouble();
+        
+        if(digTranf <= limite.getLimite() && contaOrigem.getSaldo() >= digTranf){
+            contaOrigem.setSaldo(contaOr - digTranf);
+            contaDestino.setSaldo(contaDest + digTranf);
+        }else{
+            System.out.println("A operação não foi concluída");
+        }
+
+    }
+
+    public static void Saque(Conta conta) {
+         Scanner entrada = new Scanner(System.in);
+        
+        double saldoAtual = conta.getSaldo(), digSaque;
+        
+        System.out.println("Quanto deseja sacar? \nO seu limite é de " + conta.getLimite());
+        digSaque = entrada.nextDouble();
+        
+        if(digSaque <= conta.getLimite() && digSaque <= conta.getSaldo()){
+            conta.setSaldo(saldoAtual - digSaque);
+            System.out.println("Saldo restante: " + saldoAtual);
+            
+            
+        }else{
+            System.out.println("O saque não permitido");
+        }
     }
 
     public static void main(String[] args) {
@@ -46,6 +51,14 @@ public class Teste {
         ContaBancaria conta1 = new ContaBancaria(1, c1, 1800, 2000, 1000);
         ContaBancaria conta2 = new ContaBancaria(2, c2, 3000, 2500, 1500);        
      
-        TransferenciaConta(conta1, conta2);
+        Saque(conta1);
+        
+        TransferenciaConta(conta1, conta2, conta1);
+        
+        System.out.println(conta1.getConta());
+        System.out.println(cconta1.getSaldo());
+        
+        System.out.println(conta2.getConta());
+        System.out.println(conta2.getSaldo());
     }
 }
